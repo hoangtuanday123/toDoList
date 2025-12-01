@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi import APIRouter, Depends, HTTPException, Security, status
 from typing import Annotated
 from core.security import AuthUser,get_current_user
 from db.database import get_db
@@ -9,11 +9,11 @@ from models.base_auditable import PyObjectId
 router = APIRouter()
 
 @router.get("/")
-async def list_tasks(current_user: Annotated[AuthUser, Depends(get_current_user)],db=Depends(get_db))-> list[Task]:
+async def list_tasks(current_user: Annotated[AuthUser, Security(get_current_user,scopes=["tasks:read"])],db=Depends(get_db))-> list[Task]:
     return await db.tasks.find({"created_by": current_user.username,"deleted_by": {"$eq": None}}).to_list()
 
 @router.post("/")
-async def create_task(task_in: Task, current_user: Annotated[AuthUser, Depends(get_current_user)],db=Depends(get_db))-> Task:
+async def create_task(task_in: Task, current_user: Annotated[AuthUser, Security(get_current_user,scopes=["tasks:create"])],db=Depends(get_db))-> Task:
     task_in.created_at=datetime.utcnow()
     task_in.created_by=current_user.username
     json=task_in.model_dump(exclude=["id", "_id", "updated_at","updated_by","deleted_at","deleted_by"])
@@ -22,7 +22,7 @@ async def create_task(task_in: Task, current_user: Annotated[AuthUser, Depends(g
     return task
 
 @router.patch("/{task_id}")
-async def update_task(task_in: Task, current_user: Annotated[AuthUser, Depends(get_current_user)],db=Depends(get_db))-> Task:
+async def update_task(task_in: Task, current_user: Annotated[AuthUser, Security(get_current_user,scopes=["tasks:update"])],db=Depends(get_db))-> Task:
     task_document=await db.tasks.find_one({"_id":task_in.id})
     if not task_document:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Task not found")
@@ -34,11 +34,11 @@ async def update_task(task_in: Task, current_user: Annotated[AuthUser, Depends(g
     return task
 
 @router.delete("/{task_id}")
-async def delete_task(task_id: PyObjectId, current_user: Annotated[AuthUser, Depends(get_current_user)],db=Depends(get_db)):
+async def delete_task(task_id: PyObjectId, current_user: Annotated[AuthUser, Security(get_current_user,scopes=["tasks:delete"])],db=Depends(get_db)):
     await db.tasks.update_one({"_id":task_id}, {"$set": {"deleted_by": current_user.username, "deleted_at": datetime.utcnow()}})
 
 @router.get("/search")
-async def search_tasks(q: str, current_user: Annotated[AuthUser, Depends(get_current_user)],db=Depends(get_db))-> list[Task]:
+async def search_tasks(q: str, current_user: Annotated[AuthUser, Security(get_current_user,scopes=["tasks:read"])],db=Depends(get_db))-> list[Task]:
     regex_pattern = f".*{q}.*"
     search_criteria = {
         "title": {
@@ -52,7 +52,7 @@ async def search_tasks(q: str, current_user: Annotated[AuthUser, Depends(get_cur
     return tasks
 
 @router.get("/{task_id}")
-async def get_task(task_id: PyObjectId, current_user: Annotated[AuthUser, Depends(get_current_user)],db=Depends(get_db))-> Task:
+async def get_task(task_id: PyObjectId, current_user: Annotated[AuthUser, Security(get_current_user,scopes=["tasks:read"])],db=Depends(get_db))-> Task:
     task=await db.tasks.find_one({"_id":task_id, "deleted_by": {"$eq": None}})
     if not task:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Task not found")

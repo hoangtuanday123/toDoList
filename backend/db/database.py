@@ -10,7 +10,6 @@ async def db_connect():
     global client, db
     client = AsyncMongoClient(configs.DATABASE_URL, tz_aware=True)
     db = client[configs.DATABASE_NAME]
-    # init db
     await init_db()
 
 async def db_disconnect():
