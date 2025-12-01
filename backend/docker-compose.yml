@@ -1,0 +1,13 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:7.0.8
+    container_name: todolist_db
+    volumes:
+      - ./mongodb/data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=todolist_db
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=12345678
+    ports:
+      - '27017:27017'
