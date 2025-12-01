@@ -2,7 +2,7 @@
 from pymongo import AsyncMongoClient
 
 from core.config import configs
-
+from pymongo import TEXT
 client = None
 db = None
 
@@ -26,3 +26,4 @@ def get_client():
 async def init_db():
     await db.roles.create_index([("name")], unique=True)
     await db.users.create_index([("username")], unique=True)
+    await db.tasks.create_index([("title", TEXT)])

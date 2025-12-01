@@ -3,7 +3,14 @@ from fastapi import FastAPI,Depends
 from core.config import configs
 from fastapi.openapi.docs import get_swagger_ui_html
 from db.database import db_connect,db_disconnect
+from core.logging import config_log
+import sys
+import logging
+
 from api import all_routes
+
+config_log()
+logger = logging.getLogger("app")
 def start_app():
     app = FastAPI(
         title=configs.PROJECT_NAME , 
@@ -14,6 +21,7 @@ def start_app():
         openapi_url="/api/openapi.json",
         separate_input_output_schemas=False
     )
+
 
     app.include_router(all_routes.router, prefix="/api")
     @app.get("/api/docs", include_in_schema=False)
@@ -29,11 +37,11 @@ def start_app():
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     try:
-        # logging.debug("APP STARTUP")
+        logger.debug("APP STARTUP")
         await db_connect()
         yield
     finally:
-        # logging.debug("APP SHUTDOWN")
+        logger.debug("APP SHUTDOWN")
         await db_disconnect()
 
 app = start_app()
