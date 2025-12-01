@@ -1,0 +1,109 @@
+<template>
+  <q-toolbar>
+    <q-btn
+      v-if="$q.screen.lt.md"
+      flat
+      round
+      icon="menu"
+      @click="$emit('toggleDrawer')"
+    />
+
+    <q-toolbar-title :shrink="true" class="row no-wrap items-center">
+      <a
+        href="/home"
+        style="display: flex; align-items: center"
+        v-if="currentUser.hasRole('admin')"
+      >
+        <img
+          alt="Logo"
+          src="../../assets/image.png"
+          style="height: 60px; width: auto; margin-right: 12px"
+        />
+      </a>
+
+      <a
+        href="/owner/dashboard"
+        style="display: flex; align-items: center"
+        v-else-if="currentUser.hasRole('owner') || currentUser.hasRole('staff')"
+      >
+        <img
+          alt="Logo"
+          src="../../assets/image.png"
+          style="height: 60px; width: auto; margin-right: 12px"
+        />
+      </a>
+      <a href="/" style="display: flex; align-items: center" v-else>
+        <img
+          alt="Logo"
+          src="../../assets/image.png"
+          style="height: 60px; width: auto; margin-right: 12px"
+        />
+      </a>
+    </q-toolbar-title>
+    <!-- desktop -->
+    <template v-if="$q.screen.gt.sm">
+      <template v-if="currentUser.hasRole('admin')">
+        <q-btn-dropdown label="User" stretch flat no-caps>
+          <q-list style="min-width: 180px">
+            <q-item to="/admin/users" clickable>
+              <q-item-section>Users</q-item-section>
+            </q-item>
+            <q-item to="/admin/roles" clickable>
+              <q-item-section>Roles</q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
+        <q-space />
+      </template>
+      <template v-else>
+        <q-btn stretch flat label="home" to="/" />
+      </template>
+      <q-space />
+      <!-- right side -->
+
+      <template v-if="currentUser.hasloggedIn()">
+        <q-btn round flat>
+          <avatar
+            :user="{
+              username: userInfo.username,
+              full_name: '',
+              profile_img: '',
+            }"
+            size="28px"
+          >
+          </avatar>
+          <q-menu>
+            <q-list style="min-width: 180px">
+              <q-item clickable v-close-popup @click="logout">
+                <q-item-section avatar>
+                  <q-icon color="grey" name="logout" />
+                </q-item-section>
+                <q-item-section>logout</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
+      </template>
+      <template v-else>
+        <q-btn rounded outline to="/login">login</q-btn>
+      </template>
+    </template>
+    <!-- mobile -->
+    <template v-else>
+      <q-space />
+    </template>
+  </q-toolbar>
+</template>
+
+<script setup lang="ts">
+import { useCurrentuser } from '../../share/currentuser';
+import Avatar from '../../components/UserAvatar.vue';
+
+const currentUser = useCurrentuser();
+const userInfo = currentUser.info;
+
+function logout() {
+  // ui.confirm('Are you sure', 'Logout', () => currentUser.logout(), null)
+  currentUser.logout();
+}
+</script>

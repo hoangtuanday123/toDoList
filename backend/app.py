@@ -6,6 +6,7 @@ from db.database import db_connect,db_disconnect
 from core.logging import config_log
 import sys
 import logging
+from fastapi.middleware.cors import CORSMiddleware
 
 from api import all_routes
 
@@ -22,7 +23,13 @@ def start_app():
         separate_input_output_schemas=False
     )
 
-
+    app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    )
     app.include_router(all_routes.router, prefix="/api")
     @app.get("/api/docs", include_in_schema=False)
     async def custom_swagger_ui_html():
