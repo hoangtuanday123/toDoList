@@ -1,0 +1,818 @@
+{
+	"id": "6fcf88ac-c410-4275-acb3-0aa5e28fec98",
+	"name": "backend todolist Copy",
+	"timestamp": "2025-12-02T15:56:48.301Z",
+	"collection_id": "21406532-f2b0268e-0ec7-4b00-979f-3bd841a2bf60",
+	"folder_id": 0,
+	"environment_id": "21406532-d13903cf-feee-41e3-9cb0-65aeec3cff8b",
+	"totalPass": 66,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-12-02T15:56:46.478Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "05a84f6c-3b21-4e2e-9aa3-3c1562aab7bd",
+			"name": "login with valid input",
+			"url": "http://localhost:8000/api/auth/login",
+			"time": 97,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response status code is 200": true,
+				"Access token is a non-empty string": true,
+				"Response time is less than 300ms": true,
+				"Response has expected schema structure": true
+			},
+			"testPassFailCounts": {
+				"Response status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Access token is a non-empty string": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has expected schema structure": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				97
+			],
+			"allTests": [
+				{
+					"Response status code is 200": true,
+					"Access token is a non-empty string": true,
+					"Response time is less than 300ms": true,
+					"Response has expected schema structure": true
+				}
+			]
+		},
+		{
+			"id": "5398dc87-a7a1-4c97-947a-ac9547aa0dac",
+			"name": "login with not exists username and password",
+			"url": "http://localhost:8000/api/auth/login",
+			"time": 6,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 401": true,
+				"Response with invalid message": true,
+				"Response time is less than 300ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response with invalid message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 401": true,
+					"Response with invalid message": true,
+					"Response time is less than 300ms": true
+				}
+			]
+		},
+		{
+			"id": "e8142987-9246-4ad3-8da1-8f873f7cd630",
+			"name": "login with empty username",
+			"url": "http://localhost:8000/api/auth/login",
+			"time": 8,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 401": true,
+				"Response with invalid message": true,
+				"Response time is less than 300ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response with invalid message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Status code is 401": true,
+					"Response with invalid message": true,
+					"Response time is less than 300ms": true
+				}
+			]
+		},
+		{
+			"id": "65a77feb-d57d-4173-b3c1-44a865ef4173",
+			"name": "login with empty password",
+			"url": "http://localhost:8000/api/auth/login",
+			"time": 94,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 401": true,
+				"Response with invalid message": true,
+				"Response time is less than 300ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response with invalid message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				94
+			],
+			"allTests": [
+				{
+					"Status code is 401": true,
+					"Response with invalid message": true,
+					"Response time is less than 300ms": true
+				}
+			]
+		},
+		{
+			"id": "5dfd0e12-c8a5-42ec-b676-21cbf1e5b1df",
+			"name": "Create task with valid input",
+			"url": "http://localhost:8000/api/tasks/",
+			"time": 24,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 201 Created": true,
+				"Response time is less than 300ms": true,
+				"Response is a valid JSON object": true,
+				"Response contains required fields": true,
+				"Default/Expected fields have correct values/types": true,
+				"Title reflects the sent data": true
+			},
+			"testPassFailCounts": {
+				"Status code is 201 Created": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is a valid JSON object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response contains required fields": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Default/Expected fields have correct values/types": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Title reflects the sent data": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				24
+			],
+			"allTests": [
+				{
+					"Status code is 201 Created": true,
+					"Response time is less than 300ms": true,
+					"Response is a valid JSON object": true,
+					"Response contains required fields": true,
+					"Default/Expected fields have correct values/types": true,
+					"Title reflects the sent data": true
+				}
+			]
+		},
+		{
+			"id": "363f408d-a698-4201-b947-1ff37d38401f",
+			"name": "Create task with due date in past date",
+			"url": "http://localhost:8000/api/tasks/",
+			"time": 4,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 4xx (Expected failure)": true,
+				"Response time is less than 300ms": true,
+				"Response body contains an error message": true,
+				"Task was NOT created (No ID in response)": true
+			},
+			"testPassFailCounts": {
+				"Status code is 4xx (Expected failure)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body contains an error message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Task was NOT created (No ID in response)": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				4
+			],
+			"allTests": [
+				{
+					"Status code is 4xx (Expected failure)": true,
+					"Response time is less than 300ms": true,
+					"Response body contains an error message": true,
+					"Task was NOT created (No ID in response)": true
+				}
+			]
+		},
+		{
+			"id": "b9f307ce-d38d-4f24-902e-2db55c22af83",
+			"name": "Create task with priority not in low,normal,high",
+			"url": "http://localhost:8000/api/tasks/",
+			"time": 4,
+			"responseCode": {
+				"code": 422,
+				"name": "Unprocessable Content"
+			},
+			"tests": {
+				"Status code is 422 (Unprocessable Content)": true,
+				"Response time is less than 300ms": true,
+				"Response body contains an error message": true,
+				"Task was NOT created (No ID in response)": true
+			},
+			"testPassFailCounts": {
+				"Status code is 422 (Unprocessable Content)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body contains an error message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Task was NOT created (No ID in response)": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				4
+			],
+			"allTests": [
+				{
+					"Status code is 422 (Unprocessable Content)": true,
+					"Response time is less than 300ms": true,
+					"Response body contains an error message": true,
+					"Task was NOT created (No ID in response)": true
+				}
+			]
+		},
+		{
+			"id": "47b64345-e8ca-4314-8599-49287b7daff0",
+			"name": "Update task with valid input",
+			"url": "http://localhost:8000/api/tasks/",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 Created": true,
+				"Response time is less than 300ms": true,
+				"Response is a valid JSON object": true,
+				"Response contains required fields": true,
+				"Default/Expected fields have correct values/types": true,
+				"Title reflects the sent data": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 Created": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is a valid JSON object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response contains required fields": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Default/Expected fields have correct values/types": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Title reflects the sent data": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				13
+			],
+			"allTests": [
+				{
+					"Status code is 200 Created": true,
+					"Response time is less than 300ms": true,
+					"Response is a valid JSON object": true,
+					"Response contains required fields": true,
+					"Default/Expected fields have correct values/types": true,
+					"Title reflects the sent data": true
+				}
+			]
+		},
+		{
+			"id": "555d90df-a48e-4ff2-a17e-027d2a787a4e",
+			"name": "Update task with due date in past date",
+			"url": "http://localhost:8000/api/tasks/",
+			"time": 6,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 4xx (Expected failure)": true,
+				"Response time is less than 300ms": true,
+				"Response body contains an error message": true,
+				"Task was NOT created (No ID in response)": true
+			},
+			"testPassFailCounts": {
+				"Status code is 4xx (Expected failure)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body contains an error message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Task was NOT created (No ID in response)": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 4xx (Expected failure)": true,
+					"Response time is less than 300ms": true,
+					"Response body contains an error message": true,
+					"Task was NOT created (No ID in response)": true
+				}
+			]
+		},
+		{
+			"id": "6d3e606b-d8ce-4b57-8362-2a399e105f44",
+			"name": "Update task with priority not in low,normal,high",
+			"url": "http://localhost:8000/api/tasks/",
+			"time": 5,
+			"responseCode": {
+				"code": 422,
+				"name": "Unprocessable Content"
+			},
+			"tests": {
+				"Status code is 422 (Unprocessable Content)": true,
+				"Response time is less than 300ms": true,
+				"Response body contains an error message": true,
+				"Task was NOT created (No ID in response)": true
+			},
+			"testPassFailCounts": {
+				"Status code is 422 (Unprocessable Content)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body contains an error message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Task was NOT created (No ID in response)": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status code is 422 (Unprocessable Content)": true,
+					"Response time is less than 300ms": true,
+					"Response body contains an error message": true,
+					"Task was NOT created (No ID in response)": true
+				}
+			]
+		},
+		{
+			"id": "d3362781-39bb-4f9a-aab1-46e02e9ea70a",
+			"name": "List Tasks",
+			"url": "http://localhost:8000/api/tasks/",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 OK": true,
+				"Response time is less than 300ms": true,
+				"Response body is an Array": true,
+				"Each item in the array is a valid Task object": true,
+				"Task object contains required fields": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is an Array": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Each item in the array is a valid Task object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Task object contains required fields": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Status code is 200 OK": true,
+					"Response time is less than 300ms": true,
+					"Response body is an Array": true,
+					"Each item in the array is a valid Task object": true,
+					"Task object contains required fields": true
+				}
+			]
+		},
+		{
+			"id": "91584944-315c-4d10-929e-176ea24e91b0",
+			"name": "Search task with valid keyword",
+			"url": "http://localhost:8000/api/tasks/search?q=do",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 OK": true,
+				"Response time is less than 300ms": true,
+				"Response body is an Array": true,
+				"Each item in the array is a valid Task object": true,
+				"Task object contains required fields": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is an Array": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Each item in the array is a valid Task object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Task object contains required fields": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Status code is 200 OK": true,
+					"Response time is less than 300ms": true,
+					"Response body is an Array": true,
+					"Each item in the array is a valid Task object": true,
+					"Task object contains required fields": true
+				}
+			]
+		},
+		{
+			"id": "e764310f-5db7-4bd0-bfe8-d3b7813fddd6",
+			"name": "Search task with invalid keyword Copy",
+			"url": "http://localhost:8000/api/tasks/search?q=123",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 OK": true,
+				"Response time is less than 300ms": true,
+				"Response body is an Array": true,
+				"Task list is empty, but still an array": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is an Array": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Task list is empty, but still an array": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 200 OK": true,
+					"Response time is less than 300ms": true,
+					"Response body is an Array": true,
+					"Task list is empty, but still an array": true
+				}
+			]
+		},
+		{
+			"id": "1bd47f08-4cb6-4fc8-89c1-2345d18febb3",
+			"name": "Get task with valid id",
+			"url": "http://localhost:8000/api/tasks/692f0c3f074481079e8a7429",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 OK": true,
+				"Response time is less than 300ms": true,
+				"Response body is a single Task object": true,
+				"Returned Task ID matches the requested ID": true,
+				"Task object contains valid structure": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is a single Task object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Returned Task ID matches the requested ID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Task object contains valid structure": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 200 OK": true,
+					"Response time is less than 300ms": true,
+					"Response body is a single Task object": true,
+					"Returned Task ID matches the requested ID": true,
+					"Task object contains valid structure": true
+				}
+			]
+		},
+		{
+			"id": "1a793b10-69cd-4220-9ccc-e13212e9e329",
+			"name": "Delete task",
+			"url": "http://localhost:8000/api/tasks/692f0c3f074481079e8a7429",
+			"time": 19,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 204 No Content (Successful Deletion)": true,
+				"Response time is less than 300ms": true,
+				"Response body is empty or null (Expected for 204)": true
+			},
+			"testPassFailCounts": {
+				"Status code is 204 No Content (Successful Deletion)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is empty or null (Expected for 204)": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				19
+			],
+			"allTests": [
+				{
+					"Status code is 204 No Content (Successful Deletion)": true,
+					"Response time is less than 300ms": true,
+					"Response body is empty or null (Expected for 204)": true
+				}
+			]
+		},
+		{
+			"id": "21789372-9cdc-4212-9d9a-256a0333c1d4",
+			"name": "Get task with id not exists",
+			"url": "http://localhost:8000/api/tasks/692ef9fb4bd670fb8221257a",
+			"time": 6,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404 Not Found": true,
+				"Response time is less than 300ms": true,
+				"Response body contains an error message": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404 Not Found": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body contains an error message": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 404 Not Found": true,
+					"Response time is less than 300ms": true,
+					"Response body contains an error message": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 312,
+	"collection": {
+		"requests": [
+			{
+				"id": "05a84f6c-3b21-4e2e-9aa3-3c1562aab7bd",
+				"method": "POST"
+			},
+			{
+				"id": "5398dc87-a7a1-4c97-947a-ac9547aa0dac",
+				"method": "POST"
+			},
+			{
+				"id": "e8142987-9246-4ad3-8da1-8f873f7cd630",
+				"method": "POST"
+			},
+			{
+				"id": "65a77feb-d57d-4173-b3c1-44a865ef4173",
+				"method": "POST"
+			},
+			{
+				"id": "5dfd0e12-c8a5-42ec-b676-21cbf1e5b1df",
+				"method": "POST"
+			},
+			{
+				"id": "363f408d-a698-4201-b947-1ff37d38401f",
+				"method": "POST"
+			},
+			{
+				"id": "b9f307ce-d38d-4f24-902e-2db55c22af83",
+				"method": "POST"
+			},
+			{
+				"id": "47b64345-e8ca-4314-8599-49287b7daff0",
+				"method": "PATCH"
+			},
+			{
+				"id": "555d90df-a48e-4ff2-a17e-027d2a787a4e",
+				"method": "PATCH"
+			},
+			{
+				"id": "6d3e606b-d8ce-4b57-8362-2a399e105f44",
+				"method": "PATCH"
+			},
+			{
+				"id": "d3362781-39bb-4f9a-aab1-46e02e9ea70a",
+				"method": "GET"
+			},
+			{
+				"id": "91584944-315c-4d10-929e-176ea24e91b0",
+				"method": "GET"
+			},
+			{
+				"id": "e764310f-5db7-4bd0-bfe8-d3b7813fddd6",
+				"method": "GET"
+			},
+			{
+				"id": "1bd47f08-4cb6-4fc8-89c1-2345d18febb3",
+				"method": "GET"
+			},
+			{
+				"id": "1a793b10-69cd-4220-9ccc-e13212e9e329",
+				"method": "DELETE"
+			},
+			{
+				"id": "21789372-9cdc-4212-9d9a-256a0333c1d4",
+				"method": "GET"
+			}
+		]
+	}
+}
