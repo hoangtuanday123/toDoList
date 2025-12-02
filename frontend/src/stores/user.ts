@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 // Define or import the User type
 interface User {
-    id: number;
+    id: string;
     username: string;
     permissions: string[];
 }

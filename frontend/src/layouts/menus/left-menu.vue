@@ -31,7 +31,7 @@
 </template>
 <script setup lang="ts">
 
-import { useCurrentuser } from '../../share/currentuser';
+import { useCurrentuser } from '../../share/current-user';
 
 const currentUser = useCurrentuser();
 

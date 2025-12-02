@@ -24,7 +24,7 @@
     </q-page>
 </template>
 <script setup lang="ts">
-import api from '../services/api';
+import { api } from '../services/client';
 import { ref } from 'vue'
 
 import { userStore } from '../stores/user'
@@ -46,16 +46,16 @@ async function onSubmit() {
         const loginreq = {
             username: username.value,
             password: password.value,
-            grant_type: 'password'
+            grant_type: 'password',
 
         }
-        const token = await api.api.auth.login(loginreq);
+        const token = await api.auth.loginApiAuthLoginPost(loginreq).then(res=>res.data)
 
         if (token) {
-            _userStore.saveToken(token)
-            const user = await api.api.user.getCurrentUser()
+            _userStore.saveToken(token.access_token)
+            const user = await api.currentUser.getCurrentUserInfoApiCurrentUserGet().then(res=>res.data)
 
-            _userStore.saveUserInfo({ id: user['id'], username: user['username'], permissions: user['permissions']})
+            _userStore.saveUserInfo({ id: user._id, username: user.username, permissions: user.permissions})
             router.push({ path: '/home' })
 
         }

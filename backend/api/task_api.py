@@ -10,7 +10,7 @@ router = APIRouter()
 
 @router.get("/")
 async def list_tasks(current_user: Annotated[AuthUser, Security(get_current_user,scopes=["tasks:read"])],db=Depends(get_db))-> list[Task]:
-    return await db.tasks.find({"created_by": current_user.username,"deleted_by": {"$eq": None}}).to_list()
+    return await db.tasks.find({"created_by": current_user.username,"deleted_by": {"$eq": None}}).sort("due_date", 1).to_list()
 
 @router.post("/")
 async def create_task(task_in: Task, current_user: Annotated[AuthUser, Security(get_current_user,scopes=["tasks:create"])],db=Depends(get_db))-> Task:
@@ -21,7 +21,7 @@ async def create_task(task_in: Task, current_user: Annotated[AuthUser, Security(
     task=await db.tasks.find_one({"_id":result.inserted_id})
     return task
 
-@router.patch("/{task_id}")
+@router.patch("/")
 async def update_task(task_in: Task, current_user: Annotated[AuthUser, Security(get_current_user,scopes=["tasks:update"])],db=Depends(get_db))-> Task:
     task_document=await db.tasks.find_one({"_id":task_in.id})
     if not task_document:
@@ -48,7 +48,7 @@ async def search_tasks(q: str, current_user: Annotated[AuthUser, Security(get_cu
         "created_by": current_user.username,
         "deleted_by": {"$eq": None}
     }
-    tasks=await db.tasks.find(search_criteria).to_list()
+    tasks=await db.tasks.find(search_criteria).sort("due_date", 1).to_list()
     return tasks
 
 @router.get("/{task_id}")

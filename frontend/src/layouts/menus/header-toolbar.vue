@@ -12,19 +12,7 @@
       <a
         href="/home"
         style="display: flex; align-items: center"
-        v-if="currentUser.hasRole('admin')"
-      >
-        <img
-          alt="Logo"
-          src="../../assets/image.png"
-          style="height: 60px; width: auto; margin-right: 12px"
-        />
-      </a>
-
-      <a
-        href="/owner/dashboard"
-        style="display: flex; align-items: center"
-        v-else-if="currentUser.hasRole('owner') || currentUser.hasRole('staff')"
+        v-if="currentUser.hasloggedIn()"
       >
         <img
           alt="Logo"
@@ -42,20 +30,7 @@
     </q-toolbar-title>
     <!-- desktop -->
     <template v-if="$q.screen.gt.sm">
-      <template v-if="currentUser.hasRole('admin')">
-        <q-btn-dropdown label="User" stretch flat no-caps>
-          <q-list style="min-width: 180px">
-            <q-item to="/admin/users" clickable>
-              <q-item-section>Users</q-item-section>
-            </q-item>
-            <q-item to="/admin/roles" clickable>
-              <q-item-section>Roles</q-item-section>
-            </q-item>
-          </q-list>
-        </q-btn-dropdown>
-        <q-space />
-      </template>
-      <template v-else>
+      <template>
         <q-btn stretch flat label="home" to="/" />
       </template>
       <q-space />
@@ -96,8 +71,8 @@
 </template>
 
 <script setup lang="ts">
-import { useCurrentuser } from '../../share/currentuser';
-import Avatar from '../../components/UserAvatar.vue';
+import { useCurrentuser } from '../../share/current-user';
+import Avatar from '../../components/user-avatar.vue';
 
 const currentUser = useCurrentuser();
 const userInfo = currentUser.info;
