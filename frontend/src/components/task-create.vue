@@ -74,12 +74,12 @@ const task=ref<Task>({
     priority: Priority.Normal,
     is_completed: false,
 })
-const dueDateString = ref<string>('');
+const dueDateString = ref<Date | null>(null);
 const priorityOptions = ref([])
 const priorityModel = ref<Priority>(Priority.Normal);
 async function addTask() {
     try {
-      if (dueDateString.value==null || dueDateString.value=='') {
+      if (dueDateString.value==null) {
             ui.error('Due date cannot be empty')
             return
         }
