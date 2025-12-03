@@ -4,9 +4,8 @@ import datetime
 import jwt
 from jwt.exceptions import InvalidTokenError
 from fastapi.security import OAuth2PasswordBearer,SecurityScopes
-from fastapi import Depends, FastAPI, HTTPException, Security, status
+from fastapi import Depends,  HTTPException, status
 from typing import Annotated
-from db.database import get_db
 password_hash = PasswordHash.recommended()
 
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"

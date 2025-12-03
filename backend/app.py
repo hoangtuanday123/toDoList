@@ -1,10 +1,9 @@
 from contextlib import asynccontextmanager
-from fastapi import FastAPI,Depends
+from fastapi import FastAPI
 from core.config import configs
 from fastapi.openapi.docs import get_swagger_ui_html
 from db.database import db_connect,db_disconnect
 from core.logging import config_log
-import sys
 import logging
 from fastapi.middleware.cors import CORSMiddleware
 

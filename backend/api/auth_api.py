@@ -1,11 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
-from core.security import hash_password,Token,verify_password,create_access_token,AuthUser
+from core.security import Token,verify_password,create_access_token,AuthUser
 from db.database import get_db
 from models.role import Role
-from models.permissions import Permissions
 from models.user import User
-from datetime import datetime
 from typing import Annotated
 
 router = APIRouter()

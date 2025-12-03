@@ -1,5 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Request, status
-from typing import Annotated
+from fastapi import APIRouter, Depends
 from core.security import hash_password
 from db.database import get_db
 from models.role import Role

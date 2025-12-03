@@ -1,10 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException, Security, status
+from fastapi import APIRouter, Security
 from typing import Annotated
 from core.security import AuthUser,get_current_user
-from db.database import get_db
-from datetime import datetime
-from models.task import Task
-from models.base_auditable import PyObjectId
 from models.user import User
 router = APIRouter()
 
