@@ -78,7 +78,6 @@ const currentUser = useCurrentuser();
 const userInfo = currentUser.info;
 
 function logout() {
-  // ui.confirm('Are you sure', 'Logout', () => currentUser.logout(), null)
   currentUser.logout();
 }
 </script>

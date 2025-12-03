@@ -6,9 +6,8 @@ const _userStore = userStore();
   const { authToken } = storeToRefs(_userStore);
 export const api = new Api({
   securityWorker: () => {
-    const token = authToken.value; // **ĐỌC GIÁ TRỊ MỚI NHẤT TẠI ĐÂY**
-    
-    // Trả về cấu hình headers nếu có token
+    const token = authToken.value; 
+  
     return token ? { 
       headers: { 
         Authorization: `Bearer ${String(token)}` 

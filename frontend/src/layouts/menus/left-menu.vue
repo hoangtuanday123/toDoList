@@ -36,7 +36,6 @@ import { useCurrentuser } from '../../share/current-user';
 const currentUser = useCurrentuser();
 
 function logout() {
-  // ui.confirm('Are you sure', 'Logout', () => currentUser.logout(), null)
   currentUser.logout();
 }
 </script>

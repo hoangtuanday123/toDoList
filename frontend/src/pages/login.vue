@@ -33,7 +33,6 @@ import router from '../router/index'
 import * as ui from '../utils/ui'
 const username = ref('')
 const password = ref('')
-// const accept = ref(false)
 
 const loading = ref(false)
 
@@ -73,7 +72,6 @@ async function onSubmit() {
 async function onReset() {
     username.value = ''
     password.value = ''
-    // accept.value = false
 }
 
 </script>

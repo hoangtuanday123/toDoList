@@ -61,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import { taskCreatedEvent, emitTaskCreated } from '../utils/eventBus';
+import {  emitTaskCreated } from '../utils/eventBus';
 import {  ref, onMounted } from 'vue';
 import { api } from '../services/client';
 import * as ui from '../utils/ui'
