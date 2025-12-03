@@ -76,7 +76,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted,watch } from 'vue';
+import { taskCreatedEvent } from '../utils/eventBus';
 import { api } from '../services/client';
 import * as ui from '../utils/ui'
 import { Task, Priority } from '../services/api';
@@ -235,5 +236,8 @@ onMounted(async () => {
         { label: 'Normal', value: Priority.Normal },
         { label: 'High', value: Priority.High },
     ];
+    watch(taskCreatedEvent, () => {
+        fetchTasks();
+    });
 })
 </script>

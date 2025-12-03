@@ -61,6 +61,7 @@
 </template>
 
 <script setup lang="ts">
+import { taskCreatedEvent, emitTaskCreated } from '../utils/eventBus';
 import {  ref, onMounted } from 'vue';
 import { api } from '../services/client';
 import * as ui from '../utils/ui'
@@ -93,6 +94,7 @@ async function addTask() {
       task.value.due_date = dueDateString.value;
       task.value.priority = priorityModel.value['value'];
       await api.tasks.createTaskApiTasksPost(task.value).then(res=>res.data)
+      emitTaskCreated();
       ui.success('Create task successfully')
         
     } catch (error) {
