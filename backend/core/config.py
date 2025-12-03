@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 
-load_dotenv(override=True)
+load_dotenv()
 
 
 class Configurations:

@@ -15,13 +15,13 @@ services:
     image: hoangtuanhcmus/dev:todolist_backend_v1
     container_name: todolist_backend
     environment:
-      - HOST="0.0.0.0"
+      - HOST=0.0.0.0
       - PORT=8000
-      - PROJECT_NAME="TO DO LIST API"
-      - PROJECT_VERSION="1.0.0"
+      - PROJECT_NAME=TO DO LIST API
+      - PROJECT_VERSION=1.0.0
       - DEBUG_MODE=True
-      - DATABASE_URL="mongodb://root:12345678@localhost?retryWrites=true&w=majority"
-      - DATABASE_NAME="todolist_db"
+      - DATABASE_URL=mongodb://root:12345678@mongodb?retryWrites=true&w=majority
+      - DATABASE_NAME=todolist_db
     ports:
       - "8000:8000"
     depends_on:
@@ -42,5 +42,3 @@ services:
 networks:
   proxy_network:
     external: true
-
-
