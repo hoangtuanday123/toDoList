@@ -1,0 +1,46 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:7.0.8
+    container_name: todolist_db
+    volumes:
+      - ./mongodb/data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=todolist_db
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=12345678
+    ports:
+      - '27017:27017'
+  backend:
+    image: hoangtuanhcmus/dev:todolist_backend_v1
+    container_name: todolist_backend
+    environment:
+      - HOST="0.0.0.0"
+      - PORT=8000
+      - PROJECT_NAME="TO DO LIST API"
+      - PROJECT_VERSION="1.0.0"
+      - DEBUG_MODE=True
+      - DATABASE_URL="mongodb://root:12345678@localhost?retryWrites=true&w=majority"
+      - DATABASE_NAME="todolist_db"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+    networks:
+      - default
+      - proxy_network
+  frontend:
+    image: hoangtuanhcmus/dev:todolist_frontend_v1
+    container_name: todolist_frontend
+    ports:
+      - "9000:9000"
+    depends_on:
+      - backend
+    networks:
+      - default
+      - proxy_network
+networks:
+  proxy_network:
+    external: true
+
+
