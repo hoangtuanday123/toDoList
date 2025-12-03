@@ -4,7 +4,7 @@ WORKDIR /frontend
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN quasar build
+RUN npm run build
 
 EXPOSE 9000
 CMD [ "serve","-s", "dist/spa", "-l", "9000" ]
