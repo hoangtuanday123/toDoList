@@ -15,7 +15,6 @@
 </template>
 
 <script setup lang="ts">
-import * as ui from '../../utils/ui';
 import {  date } from 'quasar'
 
 
@@ -24,6 +23,7 @@ const props = defineProps<{
     
 }>()
 
+console.log('DateInput modelValue: ' + props.modelValue)
 
 function dateToString(val: Date | string): string {
     console.log('dateToString input value: ' + val)
@@ -52,6 +52,7 @@ const updateValue = (val) => {
         else if (val.length >= 'DD MMM YYYY'.length)
         {
             const date = dateFromString(val)
+            date.setHours(12, 0, 0, 0);
             emit('update:modelValue', date)
         }
     }

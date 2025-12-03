@@ -76,8 +76,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue';
-import { date } from 'quasar';
+import { ref, onMounted } from 'vue';
 import { api } from '../services/client';
 import * as ui from '../utils/ui'
 import { Task, Priority } from '../services/api';
@@ -94,7 +93,7 @@ async function fetchTasks() {
             id: task._id,
             title: task.title,
             description: task.description,
-            due_date: task.due_date ,
+            due_date: task.due_date,
             priority: task.priority,
             is_completed: task.is_completed,
             showDetail: false,
@@ -106,15 +105,24 @@ async function fetchTasks() {
 }
 async function updateTask(task) {
     try {
+        const due = new Date(task.due_date);
+        const now = new Date();
+        due.setHours(0, 0, 0, 0);
+        now.setHours(0, 0, 0, 0);
         if (task.due_date==null || task.due_date=='') {
             ui.error('Due date cannot be empty')
             return
         }
+        if (due < now) {
+            ui.error('Due date cannot be in the past')
+            return
+        }
+        console.log('Due date set to: ' + task.due_date)
         const taskIn:Task = {
             _id: task.id,
             title: task.title,
             description: task.description,
-            due_date: task.due_date ,
+            due_date: task.due_date,
             priority: task.priority.value,
             is_completed: task.is_completed,
         }
@@ -144,7 +152,6 @@ async function checkBoxChange(taskId:string) {
         checkBoxTask.value.push(taskId);
     }
     openBulkActions.value = checkBoxTask.value.length > 0;
-    console.log(checkBoxTask.value)
 }
 
 async function UpdateBulkTask() {
@@ -152,16 +159,24 @@ async function UpdateBulkTask() {
         for (const taskId of checkBoxTask.value) {
             const task = tasks.value.find(t => t.id === taskId);
             if (task) {
+                const due = new Date(task.due_date);
+                const now = new Date();
+                due.setHours(0, 0, 0, 0);
+                now.setHours(0, 0, 0, 0);
                 if (task.due_date==null || task.due_date=='') {
                     ui.error('Due date of ' + task.title + ' cannot be empty')
                 
+                }
+                if  (due < now) {
+                    ui.error('Due date cannot be in the past')
+                    return
                 }
                 else {
                     const taskIn:Task = {
                     _id: task.id,
                     title: task.title,
                     description: task.description,
-                    due_date: task.due_date ,
+                    due_date: task.due_date,
                     priority: task.priority.value,
                     is_completed: true,
                     }

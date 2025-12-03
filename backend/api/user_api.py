@@ -22,7 +22,7 @@ async def setup(db=Depends(get_db))->None:
     user=User(username="user",is_active=True,roles=["user"])
     user_existed= await db.users.count_documents({"username":user.username})
     if user_existed <= 0:
-        user.hashed_password=hash_password("12345678")
+        user.hashed_password=hash_password("user","12345678")
         user.created_at=datetime.utcnow()
         user.created_by="system"
         json=user.model_dump(exclude=["id", "_id", "updated_at","updated_by","deleted_at","deleted_by"])

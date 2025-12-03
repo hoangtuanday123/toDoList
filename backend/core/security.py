@@ -28,11 +28,11 @@ class Token(BaseModel):
     access_token: str
     token_type: str
 
-def hash_password(password):
-    return password_hash.hash(password)
+def hash_password(username,password):
+    return password_hash.hash(username+'@'+password)
 
-def verify_password(plain_password, hashed_password):
-    return password_hash.verify(plain_password, hashed_password)
+def verify_password(username,plain_password, hashed_password):
+    return password_hash.verify(username+'@'+plain_password, hashed_password)
 
 def encode_token(payload:str):
     return jwt.encode(payload, key=SECRET_KEY, algorithm=ALGORITHM)

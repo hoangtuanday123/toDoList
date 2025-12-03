@@ -16,10 +16,16 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const _userStore = userStore();
   const { authToken } = storeToRefs(_userStore);
-  if (to.path === '/') next()
-  if (to.path !== '/login' && !authToken.value) next({ path: '/login', query: { return_url: encodeURIComponent(to.fullPath) } })
-  else next()
-  next()
+  if (authToken.value && (to.path === '/' || to.path === '/login')) {
+    return next({ path: '/home' });
+  }
+  if (!authToken.value && to.path !== '/login') {
+    return next({
+      path: '/login',
+      query: { return_url: encodeURIComponent(to.fullPath) }
+    });
+  }
+  return next();
 })
 
 export default router

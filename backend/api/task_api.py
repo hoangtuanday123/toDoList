@@ -14,7 +14,8 @@ async def list_tasks(current_user: Annotated[AuthUser, Security(get_current_user
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_task(task_in: Task, current_user: Annotated[AuthUser, Security(get_current_user,scopes=["tasks:create"])],db=Depends(get_db))-> Task:
-    if task_in.due_date and task_in.due_date <= datetime.now(timezone.utc):
+    now_date = datetime.now(timezone.utc).date()
+    if task_in.due_date and task_in.due_date.date() < now_date:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Due date cannot be in the past."
@@ -28,11 +29,11 @@ async def create_task(task_in: Task, current_user: Annotated[AuthUser, Security(
 
 @router.patch("/")
 async def update_task(task_in: Task, current_user: Annotated[AuthUser, Security(get_current_user,scopes=["tasks:update"])],db=Depends(get_db))-> Task:
-    
+    now_date = datetime.now(timezone.utc).date()
     task_document=await db.tasks.find_one({"_id":task_in.id})
     if not task_document:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Task not found")
-    if task_in.due_date and task_in.due_date <= datetime.now(timezone.utc):
+    if task_in.due_date and task_in.due_date.date() < now_date:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Due date cannot be in the past."

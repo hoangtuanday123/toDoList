@@ -17,7 +17,7 @@ async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()],db=De
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="Invalid username or password")
     
     user=User(**document)
-    if user.hashed_password._secret_value != '' and not verify_password(form_data.password,user.hashed_password._secret_value):
+    if user.hashed_password._secret_value != '' and not verify_password(form_data.username.lower(),form_data.password,user.hashed_password._secret_value):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="Invalid username or password")
     
     if user.is_active == False:

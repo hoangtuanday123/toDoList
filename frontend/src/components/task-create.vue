@@ -61,8 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue';
-import { date } from 'quasar';
+import {  ref, onMounted } from 'vue';
 import { api } from '../services/client';
 import * as ui from '../utils/ui'
 import {Task,Priority} from '../services/api';
@@ -79,8 +78,16 @@ const priorityOptions = ref([])
 const priorityModel = ref<Priority>(Priority.Normal);
 async function addTask() {
     try {
+      const due = new Date(dueDateString.value);
+      const now = new Date();
+      due.setHours(0, 0, 0, 0);
+      now.setHours(0, 0, 0, 0);
       if (dueDateString.value==null) {
             ui.error('Due date cannot be empty')
+            return
+        }
+      if (due < now) {
+            ui.error('Due date cannot be in the past')
             return
         }
       task.value.due_date = dueDateString.value;
